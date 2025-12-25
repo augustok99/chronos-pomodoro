@@ -1,20 +1,20 @@
 import './styles/theme.css'
 import './styles/global.css'
-import { Heading } from './components/Heading.tsx'
+import { Container } from './components/Container'
+import { Heading } from './components/Heading'
 
 function App() {
-  console.log('Oi');
-  
+  return <>
+    <Container>
+      <Heading>LOGO</Heading>
+    </Container>
 
-  return (
-    <>
-      <Heading attr={123} attr2='String'> Olá Mundo 1 </Heading>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Pariatur laborum aspernatur impedit assumenda maiores cum consequuntur! Esse.
-      </p>
+    <Container>
+      <Heading>Menu</Heading>
+    </Container>
+
     </>
-  )
+  
 }
 
 export default App
