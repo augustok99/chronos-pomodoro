@@ -1,6 +1,7 @@
 import { Container } from './components/Container'
 import { Logo } from './components/Logo'
 import { Menu } from './components/Menu'
+import { Footer } from './components/Footer'
 
 import './styles/theme.css'
 import './styles/global.css'
@@ -12,10 +13,13 @@ import { PlayCircleIcon } from 'lucide-react'
 
 
 function App() {
-  return <>
-    <Container>
-      <Logo />
-    </Container>
+
+  return (
+    <>
+
+      <Container>
+        <Logo />
+      </Container>
 
     <Container>
       <Menu />
@@ -46,9 +50,10 @@ function App() {
     </Container>
 
       <Container>
-        
+        < Footer />
       </Container>
     </>
+  )
 }
 
 export default App
