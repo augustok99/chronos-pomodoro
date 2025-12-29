@@ -5,6 +5,7 @@ import {
   SunIcon,
   MoonIcon,
 } from "lucide-react";
+
 import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
 
@@ -37,7 +38,7 @@ export function Menu() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [theme]); // mostra para o react que deve rodar esse efeito colateral sempre que o tema mudar
 
   return (
     <nav className={styles.menu}>

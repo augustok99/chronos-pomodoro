@@ -10,4 +10,3 @@ export function Logo() {
         </a>
     </div>
 }
-
