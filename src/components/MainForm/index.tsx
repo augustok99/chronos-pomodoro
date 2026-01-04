@@ -7,14 +7,15 @@ import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function MainForm() {
-  const { state, setState } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
 
+  // ciclos
   const nextCycle = getNextCycle(state.currentCycle);
-  const nextCycleType = getNextCycleType(nextCycle);
+  const nextCyleType = getNextCycleType(nextCycle);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,44 +35,15 @@ export function MainForm() {
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      duration: state.config[nextCycleType],
-      type: nextCycleType,
+      duration: state.config[nextCyleType],
+      type: nextCyleType,
     };
 
-    const secondsRemaining = newTask.duration * 60;
-
-    setState(prevState => {
-      return {
-        ...prevState,
-        config: { ...prevState.config },
-        activeTask: newTask,
-        currentCycle: nextCycle, // Conferir
-        secondsRemaining, // Conferir
-        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), // Conferir
-        tasks: [...prevState.tasks, newTask],
-      };
-    });
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
   }
 
-  function handleInterruptTask(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-
-    e.preventDefault()
-
-    setState(prevState => {
-      return {
-        ...prevState,
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
-        tasks: prevState.tasks.map(task => {
-          if (prevState.activeTask && prevState.activeTask.id === task.id) {
-            return {...task, interruptDate: Date.now()};
-          }
-          return task;
-        }),
-      };
-    });
-
+  function handleInterruptTask() {
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
 
   return (
@@ -83,7 +55,7 @@ export function MainForm() {
           type='text'
           placeholder='Digite algo'
           ref={taskNameInput}
-          disabled={!!state.activeTask} // forma rapida de transformar em valor boleano
+          disabled={!!state.activeTask}
         />
       </div>
 
@@ -91,10 +63,7 @@ export function MainForm() {
         <p>Próximo intervalo é de 25min</p>
       </div>
 
-      <div className='formRow'>
-        <Cycles />
-      </div>
-      {state.currentCycle > 0 && ( // só mostra os icones quando os valores for maiores que 1
+      {state.currentCycle > 0 && (
         <div className='formRow'>
           <Cycles />
         </div>
@@ -103,11 +72,14 @@ export function MainForm() {
       <div className='formRow'>
         {!state.activeTask && (
           <DefaultButton
-            title='Iniciar nova tarefa'
             aria-label='Iniciar nova tarefa'
-            type='submit' icon={<PlayCircleIcon />}
-            key='botao_submit' />
-        )} 
+            title='Iniciar nova tarefa'
+            type='submit'
+            icon={<PlayCircleIcon />}
+            key='botao_submit'
+          />
+        )}
+
         {!!state.activeTask && (
           <DefaultButton
             aria-label='Interromper tarefa atual'
@@ -119,8 +91,6 @@ export function MainForm() {
             key='botao_button'
           />
         )}
-        
-        
       </div>
     </form>
   );
