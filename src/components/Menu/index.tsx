@@ -8,6 +8,10 @@ import {
 
 import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router";
+>>>>>>> ffa3ff5 (aula-81)
 import { RouterLink } from "../RouterLink";
 
 type AvailableThemes = "dark" | "light";

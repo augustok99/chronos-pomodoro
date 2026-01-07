@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import { Home } from "lucide-react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import { AboutPomodoro } from "../../pages/AboutPomodoro";
 import { NotFound } from "../../pages/NotFound";
+=======
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import { AboutPomodoro } from "../../pages/AboutPomodoro";
+import { NotFound } from "../../pages/NotFound";
+import { Home } from "../../pages/Home";
+>>>>>>> ffa3ff5 (aula-81)
 import { useEffect } from "react";
 
 function ScrollToTop() {
