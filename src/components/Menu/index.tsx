@@ -9,10 +9,14 @@ import {
 import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { Link } from "react-router";
 >>>>>>> ffa3ff5 (aula-81)
 import { RouterLink } from "../RouterLink";
+=======
+import { Link } from "react-router";
+>>>>>>> parent of 524abec (aula-79)
 
 type AvailableThemes = "dark" | "light";
 
@@ -47,32 +51,32 @@ export function Menu() {
 
   return (
     <nav className={styles.menu}>
-      <RouterLink
+      <Link
         className={styles.menuLink}
-        href="/"
+        to="/"
         aria-label="Ir para a página inicial"
         title="Ir para a Home"
       >
         <HouseIcon />
-      </RouterLink>
+      </Link>
 
-      <RouterLink
+      <a
         className={styles.menuLink}
-        href="/history/"
+        href="#"
         aria-label="Ver histórico"
         title="Ver Histórico"
       >
         <HistoryIcon />
-      </RouterLink>
-      <RouterLink
+      </a>
+      <a
         className={styles.menuLink}
-        href="/settings/"
+        href="#"
         aria-label="Configurações"
         title="Configurações"
       >
         <SettingsIcon />
-      </RouterLink>
-      <RouterLink
+      </a>
+      <a
         className={styles.menuLink}
         href="#"
         aria-label="Mudar tema"
@@ -80,7 +84,7 @@ export function Menu() {
         onClick={handleThemeChange}
       >
         {nextThemeIcon[theme]}
-      </RouterLink>
+      </a>
     </nav>
   );
 }
