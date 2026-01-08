@@ -4,7 +4,7 @@ type MessageContainerProps = {
   children: React.ReactNode;
 };
 
-export function MessageContainer({ children }: MessageContainerProps) {
+export function MessagesContainer({ children }: MessageContainerProps) {
   return (
     <>
       {children}

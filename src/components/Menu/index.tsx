@@ -1,14 +1,13 @@
 import {
   HistoryIcon,
   HouseIcon,
+  MoonIcon,
   SettingsIcon,
   SunIcon,
-  MoonIcon,
 } from "lucide-react";
-
 import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { RouterLink } from "../RouterLink";
 
 type AvailableThemes = "dark" | "light";
 
@@ -16,7 +15,6 @@ export function Menu() {
   const [theme, setTheme] = useState<AvailableThemes>(() => {
     const storageTheme =
       (localStorage.getItem("theme") as AvailableThemes) || "dark";
-
     return storageTheme;
   });
 
@@ -39,40 +37,42 @@ export function Menu() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-  }, [theme]); // mostra para o react que deve rodar esse efeito colateral sempre que o tema mudar
+  }, [theme]);
 
   return (
     <nav className={styles.menu}>
-      <Link
+      <RouterLink
         className={styles.menuLink}
-        to="/"
-        aria-label="Ir para a página inicial"
+        href="/"
+        aria-label="Ir para a Home"
         title="Ir para a Home"
       >
         <HouseIcon />
-      </Link>
+      </RouterLink>
 
-      <a
+      <RouterLink
         className={styles.menuLink}
-        href="#"
-        aria-label="Ver histórico"
+        href="/history/"
+        aria-label="Ver Histórico"
         title="Ver Histórico"
       >
         <HistoryIcon />
-      </a>
-      <a
+      </RouterLink>
+
+      <RouterLink
         className={styles.menuLink}
-        href="#"
+        href="/settings/"
         aria-label="Configurações"
         title="Configurações"
       >
         <SettingsIcon />
-      </a>
+      </RouterLink>
+
       <a
         className={styles.menuLink}
         href="#"
-        aria-label="Mudar tema"
-        title="Mudar tema"
+        aria-label="Mudar Tema"
+        title="Mudar Tema"
         onClick={handleThemeChange}
       >
         {nextThemeIcon[theme]}
